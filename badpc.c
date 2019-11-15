@@ -1,3 +1,4 @@
+#inlcude <unistd.h>
 #include <stdio.h>
 #include <semaphore.h>
 #include <stdlib.h>
