@@ -40,9 +40,13 @@ void *producer(void *arg){
       sem_wait(&full);
       sem_wait(&mutex);
       printf("\nAdding %s \t %d in buffer\n", r, counter);
-      buffer[in] = r;
-      in = (in +1) % BUFFER_SIZE; !!!!!!!!!!!!!!!!!!!!!! counter ? instead of in
+      // buffer[in] = r;
+      // in = (in +1) % BUFFER_SIZE;
+      buffer[counter] = r;
+      // !!!!!!!!!!!!!!!!!!!!!! counter ? instead of in
+      printf("in %d\n",in );
       counter ++;
+      printf("counter %d\n", counter);
       cnt++;
       sem_post(&mutex);
       sem_post(&empty);
@@ -60,8 +64,9 @@ void * consumer(){
     // while (counter == 0);  // DO NOTHING
     sem_wait(&empty);
     sem_wait(&mutex);
-    r =  buffer[out];
-    out = (out +1) % BUFFER_SIZE;
+    r = buffer[counter-1];
+    // r =  buffer[out];
+    // out = (out +1) % BUFFER_SIZE;
     counter --;
     printf("\tBuffer contents:\n");
     printBuffer();
